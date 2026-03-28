@@ -4,50 +4,50 @@
 
 1. Скопировать `.env` и заполнить credentials
 ```bash
-cp .env.example .env
+$ cp .env.example .env
 ```
 
 2. Собрать Docker
 ```bash
-docker-compose build
+$ docker-compose build
 ```
 
 3. Запустить Docker
 ```bash
-docker-compose up -d
+$ docker-compose up -d
 ```
 
 4. Зайти в контейнер
 ```bash
-docker exec -it php_container bash
+$ docker exec -it php_container bash
 ```
 
 5. Внутри контейнера — установить зависимости и накатить миграции
 ```bash
-composer install
-php bin/console doctrine:migrations:migrate
+$ composer install
+$ php bin/console doctrine:migrations:migrate
 ```
 
 6. Загрузить фикстуры (данные для старта)
 ```bash
-php bin/console doctrine:fixtures:load
+$ php bin/console doctrine:fixtures:load
 ```
 
 7. Создать администратора (изменить логин и пароль)
 ```bash
-php bin/console app:create-admin admin_login admin_password
+$ php bin/console app:create-admin admin_login admin_password
 ```
 
 8. Выдать права на папки с загрузками
 ```bash
-chown -R www-data:www-data public/uploads public/media
-chmod -R 775 public/uploads
-chmod -R 775 public/media
+$ chown -R www-data:www-data public/uploads public/media \
+    && chmod -R 775 public/uploads \
+    && chmod -R 775 public/media
 ```
 
 9. Очистить кэш
 ```bash
-php bin/console cache:clear
+$ php bin/console cache:clear
 ```
 
 10. Админ-панель доступна на `http://localhost:8080/admin`

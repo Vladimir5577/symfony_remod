@@ -3,6 +3,7 @@
 namespace App\Controller\Api;
 
 use App\Entity\Lead;
+use App\Service\LeadMailer;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -14,6 +15,7 @@ class LeadController extends AbstractController
 {
     public function __construct(
         private EntityManagerInterface $em,
+        private LeadMailer $leadMailer,
     ) {}
 
     #[Route('', name: 'create', methods: ['POST'])]
@@ -35,6 +37,8 @@ class LeadController extends AbstractController
 
         $this->em->persist($lead);
         $this->em->flush();
+
+        $this->leadMailer->sendNewLeadNotification($lead);
 
         return $this->json(['ok' => true, 'id' => $lead->getId()], 201);
     }
