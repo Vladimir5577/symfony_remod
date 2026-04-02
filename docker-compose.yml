@@ -36,6 +36,25 @@ services:
     networks:
       - app-net
 
+  messenger_worker:
+    build:
+      context: .
+      dockerfile: ./docker_env/php/Dockerfile
+    container_name: messenger_worker
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+      - ./docker_env/php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+      - ./docker_env/php/conf.d/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
+      - ./docker_env/php/conf.d/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+      - ./docker_env/php/conf.d/timezone.ini:/usr/local/etc/php/conf.d/timezone.ini
+    command: php bin/console messenger:consume async -vv --time-limit=3600
+    depends_on:
+      - postgres
+    networks:
+      - app-net
+    restart: unless-stopped
+
   postgres:
     container_name: postgres
     image: postgres:16.4
