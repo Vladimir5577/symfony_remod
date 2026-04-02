@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\CaseGalleryImage;
+use App\Entity\HomeHero;
 use App\Entity\Faq;
 use App\Entity\Package;
 use App\Entity\RenovationCase;
@@ -15,12 +16,47 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+        $this->loadHomeHero($manager);
         $this->loadCases($manager);
         $this->loadTestimonials($manager);
         $this->loadPackages($manager);
         $this->loadFaqs($manager);
         $this->loadContacts($manager);
         $manager->flush();
+    }
+
+    private function loadHomeHero(ObjectManager $manager): void
+    {
+        $hero = new HomeHero();
+        $hero->setEnabled(true);
+
+        $hero->setKickerText('Принимаем заявки · Москва и МО');
+        $hero->setTitleTop('Ремонт под ключ.');
+        $hero->setTitleAccent('90 дней — и можно заезжать.');
+        $hero->setSubtitleText('Берём на себя всё: замеры, материалы, команду, контроль и клининг. Цена и срок — в договоре до начала работ.');
+        $hero->setBadgeText('Белый · Комфорт · 84 дня');
+        $hero->setBeforeLabelText('До');
+
+        $hero->setPrimaryCtaText('Узнать стоимость за 10 минут');
+        $hero->setPrimaryCtaUrl('/ocenka');
+        $hero->setSecondaryCtaText('Посмотреть кейсы');
+        $hero->setSecondaryCtaUrl('/kejsy');
+
+        $hero->setUtp1Label('90 дней');
+        $hero->setUtp1Desc('Фиксированный срок. Сдаём в дату из договора — или согласуем перенос заранее.');
+        $hero->setUtp2Label('Цена в договоре');
+        $hero->setUtp2Desc('Итоговая стоимость фиксируется до начала. Никаких «внезапных доплат».');
+        $hero->setUtp3Label('Рассрочка');
+        $hero->setUtp3Desc('Разбиваем платёж на части. Уточняем условия на первой встрече.');
+
+        $hero->setBeforeAlt('До ремонта');
+        $hero->setAfterAlt('Современный интерьер после ремонта');
+
+        // Default files are aligned with current public/fixtures
+        $hero->setImgAfterName('after-01.jpg');
+        $hero->setImgBeforeName('before-02.jpg');
+
+        $manager->persist($hero);
     }
 
     private function loadCases(ObjectManager $manager): void

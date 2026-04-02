@@ -35,7 +35,7 @@ class RenovationCaseCrudController extends AbstractCrudController
         yield FormField::addTab('Основное');
         yield IdField::new('id')->hideOnForm();
         yield TextField::new('slug', 'Slug (URL)')
-            ->setHelp('Латиница, дефисы. Пример: novostroyka-65');
+            ->setHelp('Латиница, дефисы. Пример: novostroyka-65')->hideOnIndex();
         yield TextField::new('title', 'Заголовок');
         yield TextField::new('area', 'Площадь')->setHelp('Пример: 65 м²');
         yield ChoiceField::new('type', 'Тип объекта')
@@ -46,16 +46,16 @@ class RenovationCaseCrudController extends AbstractCrudController
         yield IntegerField::new('sortOrder', 'Порядок сортировки');
         yield TextareaField::new('summary', 'Описание')->setNumOfRows(4);
         yield ArrayField::new('challenges', 'Сложности и решения')
-            ->setHelp('Каждый пункт — отдельная строка');
+            ->setHelp('Каждый пункт — отдельная строка')->hideOnIndex();
 
         yield FormField::addTab('Фото До / После');
         yield Field::new('imgBeforeFile', 'Фото ДО')
             ->setFormType(VichImageType::class)
             ->onlyOnForms();
-        yield TextField::new('imgBeforeName', 'Файл ДО')->hideOnForm();
+        yield TextField::new('imgBeforeName', 'Файл ДО')->hideOnForm()->hideOnIndex();
         yield Field::new('imgAfterFile', 'Фото ПОСЛЕ')
             ->setFormType(VichImageType::class)
             ->onlyOnForms();
-        yield TextField::new('imgAfterName', 'Файл ПОСЛЕ')->hideOnForm();
+        yield TextField::new('imgAfterName', 'Файл ПОСЛЕ')->hideOnForm()->hideOnIndex();
     }
 }

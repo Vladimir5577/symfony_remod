@@ -8,6 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
@@ -41,14 +42,16 @@ class PackageCrudController extends AbstractCrudController
         yield BooleanField::new('featured', 'Выделенный (центральный)');
         yield IntegerField::new('sortOrder', 'Порядок');
         yield TextareaField::new('description', 'Описание')->setNumOfRows(3);
-        yield ArrayField::new('forWho', 'Для кого');
-        yield ArrayField::new('includes', 'Что входит');
+        yield ArrayField::new('forWho', 'Для кого')->hideOnIndex();
+        yield ArrayField::new('includes', 'Что входит')->hideOnIndex();
         yield ArrayField::new('levels', 'Уровни')->setHelp('Оставьте пустым для White Box');
 
         yield FormField::addTab('Фото');
         yield Field::new('imageFile', 'Изображение пакета')
             ->setFormType(VichImageType::class)
             ->onlyOnForms();
-        yield TextField::new('imageName', 'Файл')->hideOnForm();
+        yield ImageField::new('imageName', 'Фото')
+            ->setBasePath('/uploads/packages')
+            ->hideOnForm();
     }
 }

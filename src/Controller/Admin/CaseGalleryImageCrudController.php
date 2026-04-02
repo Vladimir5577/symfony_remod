@@ -8,6 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -35,7 +36,9 @@ class CaseGalleryImageCrudController extends AbstractCrudController
         yield Field::new('imageFile', 'Фото')
             ->setFormType(VichImageType::class)
             ->onlyOnForms();
-        yield TextField::new('imageName', 'Файл')->hideOnForm();
+        yield ImageField::new('imageName', 'Превью')
+            ->setBasePath('/uploads/cases/gallery')
+            ->hideOnForm();
         yield IntegerField::new('sortOrder', 'Порядок');
     }
 }

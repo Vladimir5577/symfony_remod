@@ -57,3 +57,19 @@ liip_imagine:
                     size: [900, 506]
                     mode: outbound
                     allow_upscale: false
+
+        hero_after:
+            quality: 85
+            filters:
+                thumbnail:
+                    size: [900, 675]
+                    mode: outbound
+                    allow_upscale: false
+
+        hero_before:
+            quality: 85
+            filters:
+                thumbnail:
+                    size: [600, 600]
+                    mode: outbound
+                    allow_upscale: false
