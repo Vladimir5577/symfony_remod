@@ -26,7 +26,7 @@ class SiteContactCrudController extends AbstractCrudController
     {
         yield IdField::new('id')->hideOnForm();
         yield TextField::new('phone', 'Телефон');
-        yield TextField::new('whatsapp', 'WhatsApp')->setHelp('Ссылка или номер');
+        yield TextField::new('whatsapp', 'Max')->setHelp('Ссылка max.ru (полный URL, @ник или путь u/…)');
         yield TextField::new('telegram', 'Telegram')->setHelp('Ссылка или @username');
         yield TextField::new('address', 'Адрес');
         yield TextField::new('city', 'Город');

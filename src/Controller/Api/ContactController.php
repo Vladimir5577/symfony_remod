@@ -23,7 +23,7 @@ class ContactController extends AbstractController
         }
         return $this->json([
             'phone'          => $c->getPhone(),
-            'whatsapp'       => $c->getWhatsapp(),
+            'max'            => $c->getWhatsapp(),
             'telegram'       => $c->getTelegram(),
             'address'        => $c->getAddress(),
             'city'           => $c->getCity(),
