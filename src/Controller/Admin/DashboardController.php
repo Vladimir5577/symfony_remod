@@ -2,7 +2,6 @@
 
 namespace App\Controller\Admin;
 
-use App\Controller\Admin\CaseGalleryImageCrudController;
 use App\Controller\Admin\FaqCrudController;
 use App\Controller\Admin\HomeHeroCrudController;
 use App\Controller\Admin\LeadCrudController;
@@ -38,7 +37,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Контент сайта');
         yield MenuItem::linkTo(HomeHeroCrudController::class, 'Hero (Главная)', 'fa fa-image');
         yield MenuItem::linkTo(RenovationCaseCrudController::class, 'Кейсы', 'fa fa-hard-hat');
-        yield MenuItem::linkTo(CaseGalleryImageCrudController::class, 'Галерея кейсов', 'fa fa-images');
         yield MenuItem::linkTo(TestimonialCrudController::class, 'Отзывы', 'fa fa-star');
         yield MenuItem::linkTo(PackageCrudController::class, 'Пакеты отделки', 'fa fa-layer-group');
         yield MenuItem::linkTo(FaqCrudController::class, 'FAQ', 'fa fa-question-circle');
