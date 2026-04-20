@@ -12,9 +12,14 @@ $ cp .env.example .env
 $ docker-compose build
 ```
 
-3. Запустить Docker
+3. Запустить Docker dev mode
 ```bash
 $ docker-compose up -d
+```
+
+prod mode
+```bash
+$ docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
 ```
 
 4. Зайти в контейнер

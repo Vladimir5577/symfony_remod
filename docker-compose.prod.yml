@@ -1,0 +1,7 @@
+services:
+  nginx:
+    ports:
+      - "443:443"
+    volumes:
+      - ./docker_env/nginx/config/prod-ssl.conf:/etc/nginx/conf.d/prod-ssl.conf:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
